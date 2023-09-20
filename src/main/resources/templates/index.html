@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/index-style.css">
+    <title>TFM:RE</title>
+</head>
+<body>
+    <header class="header">
+        <span class="header__title">Система формирования тестов</span>
+        <nav class="header__nav-panel">
+            <ul class="nav-panel__content-list">
+                <li class="nav-panel__content"><a th:href="@{/home}">Главная</a></li>
+                <li class="nav-panel__content"><a th:href="@{/subjects}">Предметы</a></li>
+                <li class="nav-panel__content">
+                    <form method="POST" th:action="@{/logout}">
+                        <button type="submit">Выход</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="main__reminder">
+            <div class="reminder__title-block">
+                    <span>Напоминания</span>
+            </div>
+            <div class="reminder__events-block">
+                <ul class="events-block__events-list">
+                    <!--TODO: replace li's with the cycle later (Spring/Java)-->
+<!--                    <li class="events-block__event">Place Holder <button>x</button></li>-->
+<!--                    <li class="events-block__event">PLace Holder PlaceHolder <button>x</button></li>-->
+<!--                    <li class="events-block__event">Place Holder Place Holder <button>x</button></li>-->
+<!--                    <li class="events-block__event">Place Holder Place Holder <button>x</button></li>-->
+<!--                    <li class="events-block__event">Place Holder Place Holder <button>x</button></li>-->
+<!--                    <li class="events-block__event">Place Holder Place Holder <button>x</button></li>-->
+                    <!-- TODO: add remove reminder post/patch event -->
+                    <!-- TODO: write form style in css -->
+                    <li class="events-block__event" th:each="reminderObject : ${user.reminderList}">
+                        <span th:text="${reminderObject.reminderText}"></span>
+                        <form style="display: inline" method="POST" th:action="@{/home/remove-reminder}">
+                            <input type="hidden" id="id" name="id" th:value="${reminderObject.id}"/>
+                            <input type="hidden" id="reminderText" name="reminderText" th:value="${reminderObject.reminderText}"/>
+                            <button type="submit">x</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class="reminder__new-event-block">
+                <form method="POST" th:action="@{/home/add-reminder}" th:object="${reminder}">
+                    <h3 th:if="${#fields.hasErrors('reminderText')}" th:errors="${reminder.reminderText}"></h3>
+                    <input type="text" th:field="${reminder.reminderText}">
+                    <button class="new-event-block__button" type="submit">Новое напоминание</button>
+                </form>
+            </div>
+        </div>
+        <div class="main__recent-activity">
+            <div class="recent-activity__title-block">
+                    <span>Недавние действия</span>
+            </div>
+            <div class="recent-activity__activity-block">
+                <ul class="activity-block__activities-list">
+                    <!--TODO: replace li's with the cycle later (Spring/Java)-->
+                    <li class="activity-block__activity">PlaceHolder</li>
+                    <li class="activity-block__activity">Place Holder</li>
+                    <li class="activity-block__activity">PLace Holder PlaceHolder</li>
+                    <li class="activity-block__activity">Place Holder Place Holder</li>
+                    <li class="activity-block__activity">Place Holder Place Holder</li>
+                    <li class="activity-block__activity">Place Holder Place Holder</li>
+                    <li class="activity-block__activity">Place Holder Place Holder</li>
+                    <li class="activity-block__activity">Place Holder Place Holder</li>
+                    <li class="activity-block__activity">Place Holder Place Holder</li>
+                    <li class="activity-block__activity">Place Holder Place Holder</li>
+                    <li class="activity-block__activity">Place Holder Place Holder</li>
+                    <li class="activity-block__activity">Place Holder Place Holder</li>
+                    <li class="activity-block__activity">Place Holder Place Holder</li>
+                </ul>
+            </div>
+            <div class="recent-activity__clear-block">
+                <button class="clear-block__clear-button">Очистить</button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

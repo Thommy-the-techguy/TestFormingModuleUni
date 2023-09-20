@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/tests-style.css">
+    <title>Конструктор</title>
+</head>
+<body>
+    <header class="header">
+        <span class="header__title">Система формирования тестов</span>
+        <nav class="header__nav-panel">
+            <ul class="nav-panel__content-list">
+                <li class="nav-panel__content"><a th:href="@{/home}">Главная</a></li>
+                <li class="nav-panel__content"><a th:href="@{/subjects}">Предметы</a></li>
+                <li class="nav-panel__content">
+                    <form method="POST" th:action="@{/logout}">
+                        <button type="submit">Выйти</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="main__scroll-area-wrapper" th:object="${testSearchForm}">
+            <div class="main__search-bar">
+                <form method="POST" th:action="@{/tests/__${disciple.getName()}__}">
+                    <input type="text" placeholder="Название теста" th:field="*{testName}">
+                    <figure class="search-bar__magnifier">
+                        <button type="submit">
+                            <img src="/images/magnifier.png" alt="magnifier" height="30" width="30">
+                        </button>
+                    </figure>
+                </form>
+            </div>
+            <div class="main__scroll-area" th:object="${disciple}">
+                <div class="scroll-area__test-block" th:each="test : *{tests}">
+                    <div class="test-block__test-info" th:title="${test.description}">
+                        <p class="test-info__text" th:text="${test.name}"></p>
+                    </div>
+                    <div class="test-block__test-action">
+                        <!-- edit -->
+                        <!-- delete -->
+                        <!-- print -->
+                        <figure class="test-action__edit">
+                            <img src="/images/edit.png" alt="edit">
+                        </figure>
+                        <figure class="test-action__remove">
+                            <img src="/images/remove.png" alt="remove">
+                        </figure>
+                        <figure class="test-action__print">
+                            <img src="/images/print.png" alt="print">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <div class="main__action-buttons-wrapper">
+                <div class="main__action-buttons">
+                    <button type="submit" class="action-buttons__submit-button">Добавить тест</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

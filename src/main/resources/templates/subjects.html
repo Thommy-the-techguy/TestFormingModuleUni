@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/subjects-style.css">
+    <title>TFM:RE</title>
+</head>
+<body>
+    <header class="header">
+        <span class="header__title">Система формирования тестов</span>
+        <nav class="header__nav-panel">
+            <ul class="nav-panel__content-list">
+                <li class="nav-panel__content"><a th:href="@{/home}">Главная</a></li>
+                <li class="nav-panel__content"><a th:href="@{/subjects}">Предметы</a></li>
+                <li class="nav-panel__content">
+                    <form method="POST" th:action="@{/logout}">
+                        <button type="submit">Выйти</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="main__subjects-block">
+            <figure class="main__subject"><a th:href="@{/tests/CSAN}">КСИС</a></figure>
+            <figure class="main__subject"><a th:href="@{/tests/AAPB}">ОАиП</a></figure>
+            <figure class="main__subject"><a th:href="@{/tests/DB}">Базы Данных</a></figure>
+            <figure class="main__subject"><a th:href="@{/tests/MTesting}">Модульн. тестирование</a></figure>
+            <figure class="main__subject"><a th:href="@{/tests/Math}">Математика</a></figure>
+<!--            <figure class="main__subject"><a th:href="@{/tests?subj='Physics'}">Физика</a></figure>-->
+<!--            <figure class="main__subject"><a th:href="@{/tests?subj='CyberSecurity'}">Безопасность</a></figure>-->
+<!--            <figure class="main__subject"><a th:href="@{/tests?subj='PAPS'}">ПАПС</a></figure>-->
+<!--            <figure class="main__subject"><a th:href="@{/tests?subj='DAPDP'}">РИПОД</a></figure>-->
+<!--            <figure class="main__subject"><a th:href="@{/tests?subj='MAACG'}">МиАКГ</a></figure>-->
+<!--            <figure class="main__subject"><a th:href="@{/tests?subj='CMAT'}">КМПЗ</a></figure>-->
+        </div>
+    </main>
+</body>
+</html>
