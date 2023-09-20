@@ -3,7 +3,7 @@
 #
 FROM gradle:8.3.0-jdk20 AS build
 COPY . .
-RUN gradle build
+RUN ./gradlew build
 
 #
 # Package stage
