@@ -1,15 +1,15 @@
-FROM ubuntu:latest AS build
-
-RUN apt-get update
-RUN apt-get install openjdk-17-jdk -y
+#
+# Build stage
+#
+FROM gradle:8.3-jdk-20 AS build
 COPY . .
+RUN gradle build
 
-RUN ./gradlew bootRun --no-daemon
-
-FROM openjdk:17-jdk-slim
-
-EXPOSE 8080
-
+#
+# Package stage
+#
+FROM openjdk:20-jdk-slim
 COPY --from=build /build/libs/TestFormingModule-0.0.1-SNAPSHOT.war app.war
-
-ENTRYPOINT ["java", "-jar", "app.war"]
+# ENV PORT=8080
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","app.war"]
