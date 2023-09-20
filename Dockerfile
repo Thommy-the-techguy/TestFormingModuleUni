@@ -1,7 +1,7 @@
 #
 # Build stage
 #
-FROM gradle:8.3-jdk-20 AS build
+FROM gradle:8.3.0-jdk20 AS build
 COPY . .
 RUN gradle build
 
